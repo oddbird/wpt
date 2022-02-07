@@ -26,4 +26,13 @@
       url: "https://rp.example/logout.php"
     }]);
   }, "FederatedCredential.logout() success.");
+
+  fedcm_test(async (t, mock) => {
+    return promise_rejects_dom(t, "SecurityError",
+      FederatedCredential.logout([{
+        accountId: "1234",
+        url: "https://other-rp.example/logout.php"
+      }])
+    );
+  }, "Logout URL should honor Content-Security-Policy.");
 </script>
