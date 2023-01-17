@@ -208,8 +208,10 @@ var testNumber = 0;
 var highlightError = false; // displays outline around failed test element.
 var printDomOnError = true; // prints dom when test fails.
 
-window.checkLayout = function(selectorList, callDone = true)
+window.checkLayout = async function(selectorList, callDone = true)
 {
+    await new Promise(r => setTimeout(r, 50)); // Give the anchor-position polyfill some time to apply changes
+
     if (!selectorList) {
         console.error("You must provide a CSS selector of nodes to check.");
         return;
