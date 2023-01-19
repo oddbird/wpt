@@ -210,12 +210,19 @@ var printDomOnError = true; // prints dom when test fails.
 
 window.checkLayout = async function(selectorList, callDone = true)
 {
-    await new Promise(r => setTimeout(r, 50)); // Give the anchor-position polyfill some time to apply changes
-
     if (!selectorList) {
         console.error("You must provide a CSS selector of nodes to check.");
         return;
     }
+
+    // Allow for a delay before checking the layout
+    // Polyfills can set this variable to give themselves time to apply changes
+    const delay = window.CHECK_LAYOUT_DELAY_MS;
+    if (typeof delay === 'number') {
+        console.log(`Waiting ${delay}ms before checking layout...`);
+        await new Promise(r => setTimeout(r, delay));
+    }
+
     var nodes = document.querySelectorAll(selectorList);
     nodes = Array.prototype.slice.call(nodes);
     var checkedLayout = false;
