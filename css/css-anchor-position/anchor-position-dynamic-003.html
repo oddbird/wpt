@@ -91,7 +91,7 @@ for (const element of document.getElementsByClassName('target')) {
   element.dataset.expectedWidth = '50';
   element.dataset.expectedHeight = '70';
 }
-checkLayout('.target');
+checkLayout('.target', false);
 
 document.body.classList.add('after');
 for (const element of document.getElementsByClassName('target')) {
