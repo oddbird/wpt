@@ -208,20 +208,11 @@ var testNumber = 0;
 var highlightError = false; // displays outline around failed test element.
 var printDomOnError = true; // prints dom when test fails.
 
-window.checkLayout = async function(selectorList, callDone = true)
+function _checkLayout(selectorList, callDone = true)
 {
     if (!selectorList) {
         console.error("You must provide a CSS selector of nodes to check.");
         return;
-    }
-
-    // This is a reserved variable not intended to be used by browsers.
-    // Instead, polyfills can set this variable to give themselves time
-    // to apply changes before proceeding with assertions about the layout.
-    const delay = window.CHECK_LAYOUT_DELAY_MS;
-    if (typeof delay === 'number') {
-        console.log(`Waiting ${delay}ms before checking layout...`);
-        await new Promise(r => setTimeout(r, delay));
     }
 
     var nodes = document.querySelectorAll(selectorList);
@@ -258,5 +249,18 @@ window.checkLayout = async function(selectorList, callDone = true)
     if (callDone)
         done();
 };
+
+window.checkLayout = function(selectorList, callDone = true) {
+    // This is a reserved variable not intended to be used by browsers.
+    // Instead, polyfills can set this variable to give themselves time
+    // to apply changes before proceeding with assertions about the layout.
+    const delay = window.CHECK_LAYOUT_DELAY_MS;
+    if (typeof delay === 'number') {
+        console.log(`Waiting ${delay}ms before checking layout...`);
+        step_timeout(() => _checkLayout(selectorList, callDone), delay)
+    } else {
+        _checkLayout(selectorList, callDone)
+    }
+}
 
 })();
