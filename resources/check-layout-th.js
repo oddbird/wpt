@@ -215,8 +215,9 @@ window.checkLayout = async function(selectorList, callDone = true)
         return;
     }
 
-    // Allow for a delay before checking the layout
-    // Polyfills can set this variable to give themselves time to apply changes
+    // This is a reserved variable not intended to be used by browsers.
+    // Instead, polyfills can set this variable to give themselves time
+    // to apply changes before proceeding with assertions about the layout.
     const delay = window.CHECK_LAYOUT_DELAY_MS;
     if (typeof delay === 'number') {
         console.log(`Waiting ${delay}ms before checking layout...`);
