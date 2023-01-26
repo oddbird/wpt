@@ -40,8 +40,8 @@
     <div class="target" style="left: anchor(--a2 right)" data-offset-x=5></div>
     <div class="target" style="width: anchor-size(--a2 width)" data-expected-width=5></div>
   </div>
-<script>
-checkLayout('.target', false);
+<script type="module">
+await checkLayoutDelayed('.target', false);
 container.classList.add('after');
 for (const element of document.getElementsByClassName('target')) {
   if (element.dataset.offsetX === '5')
@@ -49,6 +49,6 @@ for (const element of document.getElementsByClassName('target')) {
   if (element.dataset.expectedWidth === '5')
     element.dataset.expectedWidth = '10';
 }
-checkLayout('.after .target');
+checkLayoutDelayed('.after .target');
 </script>
 </body>
