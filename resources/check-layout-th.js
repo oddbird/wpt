@@ -208,13 +208,12 @@ var testNumber = 0;
 var highlightError = false; // displays outline around failed test element.
 var printDomOnError = true; // prints dom when test fails.
 
-window.checkLayout = function (selectorList, callDone = true)
+window.checkLayout = function(selectorList, callDone = true)
 {
     if (!selectorList) {
         console.error("You must provide a CSS selector of nodes to check.");
         return;
     }
-
     var nodes = document.querySelectorAll(selectorList);
     nodes = Array.prototype.slice.call(nodes);
     var checkedLayout = false;
