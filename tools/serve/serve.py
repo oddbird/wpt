@@ -264,7 +264,9 @@ class HtmlScriptInjectorHandlerWrapper:
             b"".join(response.iter_content(read_file=True)),
             b"<script>\n" +
             self.inject + b"\n" +
-            (b"// Remove the injected script tag from the DOM.\n"
+            (b"// Signal the presence of an injected script.\n"
+            b"window.INJECTED_SCRIPT=true;\n"
+            b"// Remove the injected script tag from the DOM.\n"
             b"document.currentScript.remove();\n"
             b"</script>\n"))
         return response

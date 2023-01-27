@@ -249,19 +249,4 @@ window.checkLayout = function(selectorList, callDone = true)
         done();
 };
 
-// This function is a thin wrapper around `checkLayout` and simply reads the
-// `CHECK_LAYOUT_DELAY_MS` variable to add a delay. This global variable is not
-// intended to be set by browsers; instead, polyfills can set it to give
-// themselves time to apply changes before proceeding with assertions about the
-// layout. Tests that call this function at some point and do some other work
-// after should `await` it to avoid race conditions.
-window.checkLayoutDelayed = async function(selectorList, callDone = true) {
-    const delay = window.CHECK_LAYOUT_DELAY_MS;
-    if (typeof delay === 'number') {
-        console.log(`Waiting ${delay}ms before checking layout...`);
-        await new Promise(r => step_timeout(r, delay));
-    }
-    window.checkLayout(selectorList, callDone);
-}
-
 })();
