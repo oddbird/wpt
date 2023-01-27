@@ -49,6 +49,6 @@ for (const element of document.getElementsByClassName('target')) {
   if (element.dataset.expectedWidth === '5')
     element.dataset.expectedWidth = '10';
 }
-checkLayoutDelayed('.after .target');
+checkLayoutDelayed('.after .target', true);
 </script>
 </body>
